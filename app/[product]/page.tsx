@@ -256,10 +256,19 @@ export default async function ProductPage({
           </p>
 
           {/* Launch price teaser */}
-          <div className="animate-fade-up-delay-2 mt-6 inline-flex items-center gap-3 rounded-full border border-red-500/30 bg-red-500/10 px-6 py-3">
-            <span className="text-sm text-red-400 line-through">${product.pricing.foundation}</span>
-            <span className="text-2xl font-extrabold text-white">${product.launchPricing.foundation.launch}</span>
-            <span className="rounded-full bg-red-500 px-2 py-0.5 text-[10px] font-bold text-white">LAUNCH PRICE</span>
+          <div className="animate-fade-up-delay-2 mt-6 flex flex-col items-center gap-3">
+            <div className="inline-flex items-center gap-3 rounded-full border border-red-500/30 bg-red-500/10 px-6 py-3">
+              <span className="text-sm text-red-400 line-through">${product.pricing.foundation}</span>
+              <span className="text-2xl font-extrabold text-white">${product.launchPricing.foundation.launch}</span>
+              <span className="rounded-full bg-red-500 px-2 py-0.5 text-[10px] font-bold text-white">LAUNCH PRICE</span>
+            </div>
+            <div className="inline-flex items-center gap-2 rounded-full border border-green-500/30 bg-green-500/10 px-5 py-2">
+              <svg className="h-4 w-4 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
+              </svg>
+              <span className="text-sm font-bold text-green-400">+ FREE AI Audit Block</span>
+              <span className="text-xs text-green-400/60">(a $45 value)</span>
+            </div>
           </div>
 
           <div className="animate-fade-up-delay-3 mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">

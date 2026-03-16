@@ -11,22 +11,22 @@ const commissionTiers = [
   {
     tier: "Foundation",
     commission: "30%",
-    range: "$59 – $74",
-    description: "Entry-level BRIX. Highest commission rate.",
+    range: "$29 – $74",
+    description: "Entry-level BRIX. Strong starter commission.",
     color: "#22c55e",
   },
   {
     tier: "Structure",
-    commission: "25%",
-    range: "$74 – $124",
-    description: "Mid-tier BRIX with AI and automation blocks.",
+    commission: "40%",
+    range: "$79 – $124",
+    description: "Mid-tier BRIX. Push the most popular tier.",
     color: "#eab308",
   },
   {
     tier: "Architect",
-    commission: "20%",
+    commission: "50%",
     range: "$149 – $249",
-    description: "White-label platform tier. Premium payouts.",
+    description: "White-label platform tier. Maximum payout.",
     color: "#8b5cf6",
   },
 ];
@@ -145,6 +145,18 @@ export default function AffiliatesPage() {
             <h2 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">
               Simple. Generous. Transparent.
             </h2>
+            <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-red-500/10 px-4 py-2">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75"></span>
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500"></span>
+              </span>
+              <span className="text-xs font-bold uppercase tracking-widest text-red-400">
+                Launch Bonus — First 30 Days
+              </span>
+            </div>
+            <p className="mt-3 text-sm text-muted">
+              Higher tier = higher commission. Sell the best, earn the most.
+            </p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-3">
@@ -262,7 +274,7 @@ export default function AffiliatesPage() {
             </div>
             <div>
               <p className="text-4xl font-extrabold text-gold sm:text-5xl">
-                30%
+                50%
               </p>
               <p className="mt-2 text-sm text-muted">Top-tier commission</p>
             </div>
