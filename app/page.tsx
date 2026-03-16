@@ -272,12 +272,6 @@ export default async function Home() {
                   />
                 </div>
                 <h3 className="text-lg font-bold">{product.name}</h3>
-                <p
-                  className="mt-1 text-xs font-semibold uppercase tracking-widest"
-                  style={{ color: product.color }}
-                >
-                  {product.codename}
-                </p>
                 <p className="mt-3 text-sm leading-relaxed text-muted line-clamp-2">
                   {product.description}
                 </p>
