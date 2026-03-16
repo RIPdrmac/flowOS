@@ -134,44 +134,28 @@ function BlockIcon({
   }
 }
 
-// Feature lists per tier
-function getFeatures(tier: "foundation" | "structure" | "architect", productName: string) {
-  const base = [
-    "Core business management modules",
-    "Client/customer portal",
-    "Booking & scheduling system",
-    "Mobile-responsive dashboard",
-    "Custom branding",
-    "Lifetime updates",
-  ];
-  const mid = [
-    ...base,
-    "Invoicing & payment tracking",
-    "Analytics dashboard",
-    "AI-powered assistant (Claude)",
-    "SMS & email notifications",
-    "Calendar sync",
-    "Priority support",
-  ];
-  const top = [
-    ...mid,
-    "White-label capability",
-    "Multi-location / multi-user",
-    "API access",
-    "Custom integrations",
-    `Resell ${productName} to others`,
-    "Dedicated onboarding call",
-  ];
+const tierOrder = { foundation: 0, structure: 1, architect: 2 };
 
-  switch (tier) {
-    case "foundation":
-      return base;
-    case "structure":
-      return mid;
-    case "architect":
-      return top;
-  }
+function getBlocksForTier(
+  blocks: { name: string; description: string; icon: string; tier: "foundation" | "structure" | "architect" }[],
+  tier: "foundation" | "structure" | "architect"
+) {
+  return blocks.filter((b) => tierOrder[b.tier] <= tierOrder[tier]);
 }
+
+function getNewBlocksForTier(
+  blocks: { name: string; description: string; icon: string; tier: "foundation" | "structure" | "architect" }[],
+  tier: "foundation" | "structure" | "architect"
+) {
+  return blocks.filter((b) => b.tier === tier);
+}
+
+const architectExtras = [
+  "White-label capability",
+  "Multi-location / multi-user",
+  "API access",
+  "Dedicated onboarding call",
+];
 
 export default async function ProductPage({
   params,
@@ -352,38 +336,71 @@ export default async function ProductPage({
               What&apos;s Inside
             </p>
             <h2 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">
-              8 <span className="text-[#eab308]">blocks</span> Built For Your {product.industry.charAt(0).toUpperCase() + product.industry.slice(1)} Business
+              {product.blocks.length} <span className="text-[#eab308]">blocks</span>. 3 tiers.
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-muted">
-              Everything you need to run your {product.industry} business. Each <span className="text-[#eab308]">block</span> is purpose-built for your industry.
+              Every block is purpose-built for your {product.industry} business. Higher tiers unlock more power.
             </p>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {product.blocks.map((block) => (
-              <div
-                key={block.name}
-                className="rounded-xl border border-border bg-background p-6 transition-colors hover:border-opacity-50"
-                style={{
-                  ["--hover-border" as string]: product.color,
-                }}
-              >
-                <div
-                  className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg"
-                  style={{
-                    backgroundColor: `rgba(${product.colorRgb}, 0.1)`,
-                    color: product.color,
-                  }}
-                >
-                  <BlockIcon icon={block.icon} />
+          {/* Tier sections */}
+          {(["foundation", "structure", "architect"] as const).map((tier) => {
+            const tierBlocks = getNewBlocksForTier(product.blocks, tier);
+            const tierLabel = tier === "foundation" ? "Foundation" : tier === "structure" ? "Structure" : "Architect";
+            const tierPrice = product.launchPricing[tier];
+            if (tierBlocks.length === 0) return null;
+
+            return (
+              <div key={tier} className="mb-10 last:mb-0">
+                <div className="mb-4 flex items-center gap-3">
+                  <div
+                    className="rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-widest"
+                    style={{
+                      backgroundColor: `rgba(${product.colorRgb}, ${tier === 'foundation' ? '0.1' : tier === 'structure' ? '0.15' : '0.2'})`,
+                      color: product.color,
+                    }}
+                  >
+                    {tierLabel}
+                  </div>
+                  <span className="text-sm text-muted">
+                    <span className="text-xs line-through">${tierPrice.regular}</span>{" "}
+                    <span className="font-bold text-foreground">${tierPrice.launch}</span>
+                  </span>
+                  {tier !== 'foundation' && (
+                    <span className="text-[10px] text-muted">
+                      + all {tier === 'structure' ? 'Foundation' : 'Foundation & Structure'} blocks
+                    </span>
+                  )}
                 </div>
-                <h3 className="text-sm font-bold">{block.name}</h3>
-                <p className="mt-2 text-xs leading-relaxed text-muted">
-                  {block.description}
-                </p>
+
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  {tierBlocks.map((block) => (
+                    <div
+                      key={block.name}
+                      className="group flex items-start gap-4 rounded-xl border bg-background p-5 transition-all duration-300 hover:-translate-y-0.5"
+                      style={{ borderColor: `rgba(${product.colorRgb}, 0.12)` }}
+                    >
+                      <div
+                        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
+                        style={{
+                          backgroundColor: `rgba(${product.colorRgb}, 0.1)`,
+                          color: product.color,
+                        }}
+                      >
+                        <BlockIcon icon={block.icon} />
+                      </div>
+                      <div>
+                        <h3 className="text-sm font-bold">{block.name}</h3>
+                        <p className="mt-1 text-xs leading-relaxed text-muted">
+                          {block.description}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </section>
 
@@ -480,37 +497,63 @@ export default async function ProductPage({
                   </p>
                 </div>
 
-                {/* Features */}
-                <ul className="mb-8 flex flex-col gap-3">
-                  {getFeatures(tier.key, product.name).map((feature) => (
-                    <li key={feature} className="flex items-start gap-2">
-                      <svg
-                        className="mt-0.5 h-4 w-4 shrink-0"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke={product.color}
-                        strokeWidth={2}
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                      </svg>
-                      <span className="text-sm text-muted">{feature}</span>
-                    </li>
-                  ))}
-                  {tier.key === "architect" && (
-                    <li className="flex items-start gap-2">
-                      <svg
-                        className="mt-0.5 h-4 w-4 shrink-0"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="#eab308"
-                        strokeWidth={2}
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                      </svg>
-                      <span className="text-sm font-bold text-gold">FREE SUPERDASH included</span>
-                    </li>
+                {/* Blocks included */}
+                <div className="mb-8">
+                  <p className="mb-3 text-[10px] font-bold uppercase tracking-widest text-muted">
+                    {getBlocksForTier(product.blocks, tier.key).length} Blocks Included
+                  </p>
+                  <div className="flex flex-col gap-2">
+                    {getBlocksForTier(product.blocks, tier.key).map((block) => {
+                      const isNew = block.tier === tier.key;
+                      return (
+                        <div key={block.name} className="flex items-center gap-2">
+                          <div
+                            className="flex h-5 w-5 shrink-0 items-center justify-center rounded"
+                            style={{
+                              backgroundColor: isNew ? `rgba(${product.colorRgb}, 0.15)` : `rgba(${product.colorRgb}, 0.06)`,
+                              color: isNew ? product.color : `rgba(${product.colorRgb}, 0.5)`,
+                            }}
+                          >
+                            <BlockIcon icon={block.icon} className="h-3 w-3" />
+                          </div>
+                          <span className={`text-xs ${isNew ? 'font-bold text-foreground' : 'text-muted'}`}>
+                            {block.name}
+                            {isNew && tier.key !== 'foundation' && (
+                              <span className="ml-1.5 rounded bg-gold/10 px-1 py-0.5 text-[8px] font-bold text-gold">NEW</span>
+                            )}
+                          </span>
+                        </div>
+                      );
+                    })}
+                    {/* Inherited blocks from lower tiers shown as dimmer */}
+                    {tier.key !== 'foundation' && (
+                      <p className="mt-1 text-[10px] text-muted">
+                        + everything in {tier.key === 'architect' ? 'Foundation & Structure' : 'Foundation'}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Architect extras */}
+                  {tier.key === 'architect' && (
+                    <div className="mt-4 border-t border-border pt-3">
+                      <p className="mb-2 text-[10px] font-bold uppercase tracking-widest text-gold">Platform Features</p>
+                      {architectExtras.map((feat) => (
+                        <div key={feat} className="flex items-center gap-2 py-0.5">
+                          <svg className="h-3 w-3 shrink-0 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                          </svg>
+                          <span className="text-xs text-gold">{feat}</span>
+                        </div>
+                      ))}
+                      <div className="mt-2 flex items-center gap-2 py-0.5">
+                        <svg className="h-3 w-3 shrink-0 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                        </svg>
+                        <span className="text-xs font-bold text-gold">FREE SUPERDASH included</span>
+                      </div>
+                    </div>
                   )}
-                </ul>
+                </div>
 
                 {/* CTA */}
                 <button
