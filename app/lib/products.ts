@@ -34,7 +34,7 @@ export interface Product {
     name: string;
     description: string;
     icon: string;
-    tier: "foundation" | "structure" | "architect";
+    tier: "free" | "foundation" | "structure" | "architect";
   }[];
   faqs: {
     question: string;
@@ -449,6 +449,18 @@ export const superdash = {
     'Empire-level reporting',
   ],
 };
+
+const auditBlock = {
+  name: "Audit Block",
+  description: "AI analyzes your usage after 60 days and recommends which blocks to keep, swap, or add. Free for 60 days with every BRIX.",
+  icon: "brain",
+  tier: "free" as const,
+};
+
+// Inject Audit Block into every product
+for (const product of products) {
+  product.blocks.unshift(auditBlock);
+}
 
 export function getProduct(slug: string): Product | undefined {
   return products.find((p) => p.slug === slug);

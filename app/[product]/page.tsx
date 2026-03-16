@@ -134,7 +134,7 @@ function BlockIcon({
   }
 }
 
-const tierOrder = { foundation: 0, structure: 1, architect: 2 };
+const tierOrder = { free: -1, foundation: 0, structure: 1, architect: 2 };
 
 function getBlocksForTier(
   blocks: { name: string; description: string; icon: string; tier: "foundation" | "structure" | "architect" }[],
@@ -343,6 +343,41 @@ export default async function ProductPage({
             </p>
           </div>
 
+          {/* Free block — Audit Block */}
+          {(() => {
+            const freeBlocks = product.blocks.filter((b) => b.tier === "free");
+            if (freeBlocks.length === 0) return null;
+            return (
+              <div className="mb-10">
+                <div className="mb-4 flex items-center gap-3">
+                  <div className="rounded-full bg-green-500/10 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-green-400">
+                    Free With Every BRIX
+                  </div>
+                  <span className="text-sm font-bold text-green-400">$0</span>
+                  <span className="text-[10px] text-muted">60 days free, then $4.99/mo</span>
+                </div>
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  {freeBlocks.map((block) => (
+                    <div
+                      key={block.name}
+                      className="group flex items-start gap-4 rounded-xl border border-green-500/20 bg-green-500/[0.03] p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-green-500/40"
+                    >
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-green-500/10 text-green-400">
+                        <BlockIcon icon={block.icon} />
+                      </div>
+                      <div>
+                        <h3 className="text-sm font-bold">{block.name}</h3>
+                        <p className="mt-1 text-xs leading-relaxed text-muted">
+                          {block.description}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
+
           {/* Tier sections */}
           {(["foundation", "structure", "architect"] as const).map((tier) => {
             const tierBlocks = getNewBlocksForTier(product.blocks, tier);
@@ -531,6 +566,16 @@ export default async function ProductPage({
                         + everything in {tier.key === 'architect' ? 'Foundation & Structure' : 'Foundation'}
                       </p>
                     )}
+
+                    {/* Audit Block freebie */}
+                    <div className="mt-3 flex items-center gap-2 rounded-lg border border-green-500/20 bg-green-500/5 px-3 py-2">
+                      <svg className="h-3.5 w-3.5 shrink-0 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                      </svg>
+                      <span className="text-[10px] font-bold text-green-400">
+                        Audit Block — FREE 60 days
+                      </span>
+                    </div>
                   </div>
 
                   {/* Architect extras */}
