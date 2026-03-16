@@ -109,7 +109,7 @@ export function WaitlistForm({
         <p className="mt-2 text-center text-xs text-red-400">{errorMsg}</p>
       )}
       <p className="mt-3 text-center text-xs text-muted">
-        Join <span className="font-semibold text-gold">0</span> entrepreneurs building with <span className="font-bold text-[#eab308]">BRIX</span>
+        Join <span className="font-semibold text-gold">48</span> entrepreneurs building with <span className="font-bold text-[#eab308]">BRIX</span>
       </p>
     </div>
   );
