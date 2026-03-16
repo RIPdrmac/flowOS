@@ -123,7 +123,7 @@ export default async function Home() {
         <div className="relative z-10 mx-auto max-w-5xl text-center">
           <div className="animate-fade-up">
             <h1 className="text-gold-gradient text-7xl font-extrabold tracking-tight sm:text-8xl lg:text-9xl">
-              Got <span className="text-[#eab308] font-bold">BRIX</span>?
+              GOT <span className="text-[#eab308] font-bold">BRIX</span>?
             </h1>
           </div>
           <p className="animate-fade-up-delay-1 mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
