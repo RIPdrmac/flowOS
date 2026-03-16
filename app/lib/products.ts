@@ -52,7 +52,7 @@ export const products: Product[] = [
     description: "The complete business operating system for DJs who want to stop hustling and start building.",
     hook: "Stop spinning plates. Start spinning records.",
     industry: "DJ",
-    businessType: "DJ business",
+    businessType: "DJ Business",
     painPoint: "You're running your DJ business from a notebook and texts. Gigs fall through. Clients ghost. You forget to follow up. Your rates are all over the place.",
     outcomes: [
       "Book more gigs with a professional client portal",
@@ -96,7 +96,7 @@ export const products: Product[] = [
     description: "Run your chair, your shop, and your empire. The barber business OS that cuts out the middleman.",
     hook: "Your chair. Your rules. Your brix.",
     industry: "barber",
-    businessType: "barber shop",
+    businessType: "Barber Shop",
     painPoint: "You're running your barber business from Instagram DMs and a paper calendar. Clients no-show. You can't track revenue. Your shop has no system.",
     outcomes: [
       "Fill your chair with automated appointment booking",
@@ -140,7 +140,7 @@ export const products: Product[] = [
     description: "Ministry management that serves your congregation, not a software company. Built for churches, not corporations.",
     hook: "Serve your flock, not your software.",
     industry: "church",
-    businessType: "church administration",
+    businessType: "Church Administration",
     painPoint: "You're running your church from spreadsheets and group texts. Tithes get lost. Volunteers forget their shifts. New members slip through the cracks.",
     outcomes: [
       "Manage your congregation with a complete member directory",
@@ -184,7 +184,7 @@ export const products: Product[] = [
     description: "Stop freelancing like it's a side gig. Run it like the business it is. Proposals, contracts, invoices, and clients in one system.",
     hook: "Freelance is freedom. Act like it.",
     industry: "freelance",
-    businessType: "freelance business",
+    businessType: "Freelance Business",
     painPoint: "You're running your freelance business from a dozen apps and sticky notes. Proposals take hours. Invoices get forgotten. Scope creep eats your profit.",
     outcomes: [
       "Send professional proposals in minutes, not hours",
@@ -228,7 +228,7 @@ export const products: Product[] = [
     description: "The real estate agent OS built for closers. Manage leads, listings, and closings without the bloated CRM.",
     hook: "Close more. Stress less. Own your pipeline.",
     industry: "real estate",
-    businessType: "real estate business",
+    businessType: "Real Estate Business",
     painPoint: "You're running your real estate business from a CRM that costs more than your car payment. Leads fall through. Follow-ups get missed. Your pipeline is a mess.",
     outcomes: [
       "Never lose a lead with intelligent pipeline tracking",
@@ -272,7 +272,7 @@ export const products: Product[] = [
     description: "Run your coaching practice like a pro. Sessions, clients, programs, and payments without the patchwork.",
     hook: "Coach the work. Let brix handle the business.",
     industry: "coaching",
-    businessType: "coaching practice",
+    businessType: "Coaching Practice",
     painPoint: "You're running your coaching practice from Calendly, Stripe, Google Docs, and Zoom links. Clients fall off. You can't track progress. Payments are messy.",
     outcomes: [
       "Book and manage sessions with zero admin overhead",
@@ -316,7 +316,7 @@ export const products: Product[] = [
     description: "Run your cleaning business like a machine. Schedule crews, manage clients, and track every job without the chaos.",
     hook: "Clean houses. Dirty money. Organized business.",
     industry: "cleaning",
-    businessType: "cleaning business",
+    businessType: "Cleaning Business",
     painPoint: "You're running your cleaning business from a text thread and a whiteboard. Jobs overlap. Crews show up to the wrong address. Clients cancel without notice.",
     outcomes: [
       "Schedule crews and routes with zero overlap",
@@ -360,7 +360,7 @@ export const products: Product[] = [
     description: "The tutoring business OS for educators who teach, not tech. Manage students, sessions, and progress without the app overload.",
     hook: "Teach smarter. Get paid. Own your practice.",
     industry: "tutoring",
-    businessType: "tutoring business",
+    businessType: "Tutoring Business",
     painPoint: "You're running your tutoring business from a calendar app and PayPal. Students reschedule constantly. Parents want updates you don't have time to write. Revenue is unpredictable.",
     outcomes: [
       "Book sessions and manage availability effortlessly",

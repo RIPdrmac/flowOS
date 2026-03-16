@@ -339,7 +339,7 @@ export default async function ProductPage({
               {product.blocks.length} <span className="text-[#eab308]">blocks</span>. 3 tiers.
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-muted">
-              Every block is purpose-built for your {product.industry} business. Higher tiers unlock more power.
+              Every block is purpose-built for your {product.businessType}. Higher tiers unlock more power.
             </p>
           </div>
 
